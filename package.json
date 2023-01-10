@@ -33,12 +33,12 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/trysd/npm-rammer.git"
   },
   "bugs": {
-    "url": ""
+    "url": "https://github.com/trysd/npm-rammer/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/trysd/npm-rammer#readme",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
