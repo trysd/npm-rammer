@@ -17,14 +17,13 @@ export class CommandLine {
     const targets: string[] = this.commandLine.filter(f => !f.match(/^-/)).slice(2, 4) as string[];
 
     if (options.includes('--decode')) {
-      this.unrammer(options, targets);
+      this.unrammer(targets);
     } else {
       this.rammer(options, targets);
     }
   }
 
-  private unrammer(options: string[], targets: string[]): void {
-    console.log(options, targets);
+  private unrammer(targets: string[]): void {
     const readRammerFile = targets[0] as string;
     const writeBaseDir = targets[1] as string;
     let active = false;
