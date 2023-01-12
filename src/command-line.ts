@@ -36,6 +36,7 @@ export class CommandLine {
         const fileName = td.decode(MBase64.atob(fb[0] as string));
         const body = td.decode(MBase64.atob(fb[1] as string));
         fs.outputFileSync('./' + writeBaseDir + '/' + fileName, body);
+        console.log(`${writeBaseDir + '/' + fileName}\n`);
       }
     });
     console.log('done.');
