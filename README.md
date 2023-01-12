@@ -1,4 +1,4 @@
-# RAMMER
+# [Rammer](https://www.npmjs.com/package/rammer)
 A command-line tool that allows you to put an entire folder into a single class file and retrieve the contents of each file using the get method.
 
 ## Usage
