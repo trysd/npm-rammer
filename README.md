@@ -16,7 +16,7 @@ to txt
 ```
 
 ## example
-before
+Before
 ```
 example
 ├── floor
@@ -24,12 +24,12 @@ example
 └── sample.tpl
 ```
 
-execute
+Execute
 ```
 $ npx rammer@latest --type-ts ./example after-sample.tx
 ```
 
-will be able to load
+Will be able to load
 ```js
 import { AfterSample } from "./after-sample";
 
