@@ -125,7 +125,7 @@ export type IFiles = \n${fileList.map(m => `  "${m}"`).join(' |\n')};
 
 export class ${c} {
   public static get(fileName: IFiles): string {
-    return new TextDecoder().decode(XAfter.decodeBase64(_files[fileName]));
+    return new TextDecoder().decode(${c}.decodeBase64(_files[fileName]));
   }
   public static getFileNameList(): string[] {
     return Object.keys(_files);
