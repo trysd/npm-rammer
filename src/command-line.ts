@@ -48,6 +48,7 @@ export class CommandLine {
   private rammer(options: string[], targets: string[]): void {
     const readDir = targets[0] as string;
     const tempFile = './~tmp.' + uuidv4();
+  
     const writeFile = targets[1] as string;
     const fileList = MFile.readDir(readDir, [], []);
 
@@ -78,9 +79,13 @@ export class CommandLine {
     //
     // body
     //
-    fileList.forEach((f, i) => {
-      console.log(`execute(${fileList.length}/${i + 1}): ${targets[0] + "/" + f}`);
-      const mStr = fs.readFileSync(targets[0] + "/" + f).toString();
+    fileList.forEach((f, i) => {      
+      const targetFile = targets[0]
+      + ( !targets[0]?.match(/\/$/) ? '/' : '')
+      + f;
+
+      console.log(`execute(${fileList.length}/${i + 1}): ${targetFile}`);
+      const mStr = fs.readFileSync(targetFile).toString();
       if (options.includes('--type-js')) {
         fs.appendFileSync(tempFile, 
           `files["${f}"] = "${MBase64.btoa(mStr)}";\n`
@@ -138,9 +143,8 @@ export class ${c} {
     };
     footer();
 
-    // fs.copyFileSync(tempFile, writeFile);
-    // fs.removeSync(tempFile);
-    fs.renameSync(tempFile, writeFile);
+    fs.copyFileSync(tempFile, writeFile);
+    // fs.renameSync(tempFile, writeFile);
 
     console.log('done.');
     const size = fs.statSync(writeFile).size;
@@ -152,6 +156,8 @@ export class ${c} {
       console.log('total size:', (fs.statSync(writeFile).size / 1024 / 1024).toFixed(3), 'MB');
     }
     console.log(`${fileList.length} files into "${writeFile}" were rammed.`);
+
+    fs.removeSync(tempFile);
 
   }
 
