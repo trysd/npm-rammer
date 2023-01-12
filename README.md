@@ -1,5 +1,9 @@
 # [Rammer](https://www.npmjs.com/package/rammer)
-A command-line tool that allows you to put an entire folder into a single class file and retrieve the contents of each file using the get method.
+A command-line tool that allows you to put an entire folder into a single class file and retrieve the contents of each file using the get method.  
+[![CICD](https://github.com/trysd/npm-rammer/actions/workflows/release.yml/badge.svg)](https://github.com/trysd/npm-rammer/actions/workflows/release.yml)
+[![NPM Version][npm-version-image]][npm-url]
+[![NPM Downloads][npm-downloads-image]][npm-url]
+[![Node.js Version][node-image]][node-url]
 
 ## Usage
 to TS
