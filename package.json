@@ -1,6 +1,6 @@
 {
   "name": "rammer",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "npm module",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
