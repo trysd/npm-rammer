@@ -2,6 +2,7 @@ import { MFile } from "./MFile";
 import * as fs from 'fs-extra';
 import { MBase64 } from "./MBase64";
 import { v4 as uuidv4 } from 'uuid';
+import readline from 'readline';
 
 export class CommandLine {
 
@@ -15,7 +16,7 @@ export class CommandLine {
     const options = this.commandLine.map(m => m.match(/^-/) ? m : null).filter(f => f != null) as string[];
     const targets: string[] = this.commandLine.filter(f => !f.match(/^-/)).slice(2, 4) as string[];
 
-    if (options.includes('-decode')) {
+    if (options.includes('--decode')) {
       this.unrammer(options, targets);
     } else {
       this.rammer(options, targets);
@@ -24,6 +25,24 @@ export class CommandLine {
 
   private unrammer(options: string[], targets: string[]): void {
     console.log(options, targets);
+    const readRammerFile = targets[0] as string;
+    const writeBaseDir = targets[1] as string;
+    let active = false;
+    const td = new TextDecoder();
+    readline.createInterface({ input: fs.createReadStream(readRammerFile) }).on('line', (li) => {
+      if (!active && li === 'format=txt') {
+        active = true;
+      } else if (active) {
+        console.log(li);
+        const fb = li.split(':');
+        const fileName = td.decode(MBase64.atob(fb[0] as string));
+        const body = td.decode(MBase64.atob(fb[1] as string));
+        console.log(writeBaseDir + '/' + fileName)
+        console.log(body);
+        fs.outputFileSync('./' + writeBaseDir + '/' + fileName, body);
+      }
+    });
+
   }
 
   private rammer(options: string[], targets: string[]): void {
@@ -53,7 +72,7 @@ export class CommandLine {
       }
     };
 
-    fs.removeSync(tempFile as string);
+    fs.removeSync(writeFile);
     header();
 
     //
@@ -119,19 +138,20 @@ export class ${c} {
     };
     footer();
 
-    fs.rename(tempFile, writeFile);
+    // fs.copyFileSync(tempFile, writeFile);
+    // fs.removeSync(tempFile);
+    fs.renameSync(tempFile, writeFile);
 
     console.log('done.');
-    const size = fs.statSync(tempFile).size;
+    const size = fs.statSync(writeFile).size;
     if (size < 1024) {
-      console.log('total size:', fs.statSync(tempFile).size, 'B');
+      console.log('total size:', fs.statSync(writeFile).size, 'B');
     } else if (size < 1024 * 1024) {
-      console.log('total size:', (fs.statSync(tempFile).size / 1024).toFixed(3), 'KB');
+      console.log('total size:', (fs.statSync(writeFile).size / 1024).toFixed(3), 'KB');
     } else {
-      console.log('total size:', (fs.statSync(tempFile).size / 1024 / 1024).toFixed(3), 'MB');
+      console.log('total size:', (fs.statSync(writeFile).size / 1024 / 1024).toFixed(3), 'MB');
     }
     console.log(`${fileList.length} files into "${writeFile}" were rammed.`);
-
 
   }
 
