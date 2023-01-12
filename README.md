@@ -26,7 +26,7 @@ example
 
 Execute
 ```
-$ npx rammer@latest --type-ts ./example after-sample.tx
+$ npx rammer@latest --type-ts ./example after-sample.ts
 ```
 
 Will be able to load
