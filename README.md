@@ -36,7 +36,7 @@ import { AfterSample } from "./after-sample";
 
 // Get the contents of the original file.
 // Argument types are limited to file names.
-const res = XAfter.get('floor/floor.tpl');
+const res = AfterSample.get('floor/floor.tpl');
 ```
 
 ## unrammer

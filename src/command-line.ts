@@ -13,14 +13,23 @@ export class CommandLine {
   }
 
   public main(): void {
+    this.core();
+  }
+
+  private core(): void {
     const options = this.commandLine.map(m => m.match(/^-/) ? m : null).filter(f => f != null) as string[];
     const targets: string[] = this.commandLine.filter(f => !f.match(/^-/)).slice(2, 4) as string[];
+
+    this.checkTargets(targets);
 
     if (options.includes('--decode')) {
       this.unrammer(targets);
     } else {
       this.rammer(options, targets);
     }
+  }
+  private checkTargets(targets: string[]): void {
+    
   }
 
   private unrammer(targets: string[]): void {
