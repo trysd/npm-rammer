@@ -5,15 +5,15 @@ A command-line tool that allows you to put an entire folder into a single class 
 ## Usage
 to TS
 ```js
-    $ npx rammer --type-ts ./exampleDir ./rammerNewFile.ts
+    $ npx rammer --type-ts ./example ./example.ts
 ```
 to JS
 ```js
-  $ npx rammer --type-js ./DirectoryName ./rammerNewFile.js
+  $ npx rammer --type-js ./example ./example.js
 ```
 to txt
 ```js
-  $ npx rammer --type-txt ./DirectoryName ./rammerNewFile.txt
+  $ npx rammer --type-txt ./example ./example.txt
 ```
 
 ## example
@@ -44,5 +44,5 @@ You can also simply restore the files. However, it is limited to text files conv
 
 Restoration command sample
 ```js
-  $ npm rammer@latest --decode ./yourRammedFile.txt ./writeDir
+  $ npm rammer@latest --decode ./example.txt ./newly
 ```
